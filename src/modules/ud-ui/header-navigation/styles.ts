@@ -1,9 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const NavigationWrap = styled.div``;
+export const NavigationWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-export const Navigation = styled.nav``;
+export const Navigation = styled.nav`
+  display: flex;
+  align-items: center;
+`;
 
 export const List = styled.ul`
   display: flex;
