@@ -5,7 +5,8 @@ import { MainTitle } from '../ud-ui/main-title/styles';
 import { Main } from '../ud-ui/main/styles';
 import { Form, reduxForm, Field } from 'redux-form';
 import Title from 'src/modules/ud-ui/title';
-import UDFormDateRangePicker from '../ud-ui/form/ui/components/text-field';
+import UDFormTextField from '../ud-ui/form/ui/components/text-field';
+import UDFormTextAreaField from '../ud-ui/form/ui/components/textarea-field';
 
 type CreateEventProps = {};
 
@@ -19,7 +20,59 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
           <Main>
             <Form>
               <Title>Информация об организаторе</Title>
-              <Field component={UDFormDateRangePicker} />
+              <Field
+                label={'Организатор'}
+                component={UDFormTextField}
+                name="organizer"
+                classNameWrap={'mb-10'}
+              />
+
+              <Title>Контактные данные</Title>
+              <S.Fields className={'mb-10'}>
+                <Field
+                  label={'Телефон'}
+                  component={UDFormTextField}
+                  name="organizer"
+                  classNameWrap={'mr-5 w-100'}
+                />
+                <Field
+                  label={'E-mail'}
+                  component={UDFormTextField}
+                  name="organizer"
+                  classNameWrap={'mr-5 w-100'}
+                />
+                <Field
+                  label={'Город организатора'}
+                  component={UDFormTextField}
+                  name="organizer"
+                  classNameWrap={'w-100'}
+                />
+              </S.Fields>
+
+              <Title>Общая информация</Title>
+              <Field
+                label={'Название'}
+                component={UDFormTextField}
+                name="organizer"
+                classNameWrap={'mb-10'}
+              />
+
+              <Title>Фотографии</Title>
+
+              <Field
+                label={'Видео (ссылка)'}
+                component={UDFormTextField}
+                name="organizer"
+                classNameWrap={'mb-10'}
+                icon={'url'}
+              />
+
+              <Field
+                label={'Подробное описание'}
+                component={UDFormTextAreaField}
+                name="organizer"
+                classNameWrap={'mb-12'}
+              />
             </Form>
           </Main>
         </S.Main>

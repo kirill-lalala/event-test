@@ -1,1 +1,1 @@
-export type IconNames = 'profile';
+export type IconNames = 'profile' | 'url';

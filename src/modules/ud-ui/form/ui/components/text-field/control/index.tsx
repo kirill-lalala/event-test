@@ -1,8 +1,25 @@
 import React, { useCallback } from 'react';
+import { WrappedFieldProps } from 'redux-form';
+import { IconNames } from 'src/modules/ud-ui/icon/types';
+import * as S from './styles';
+import Icon from 'src/modules/ud-ui/icon';
 
-const UDTextField = (props) => {
-  const { input } = props;
-  return <input {...input} />;
+type UDTextFieldProps = {
+  icon: IconNames;
+} & WrappedFieldProps;
+
+const UDTextField = (props: UDTextFieldProps) => {
+  const { input, icon } = props;
+  return (
+    <S.InputWrap >
+      {icon && (
+        <S.IconWrap>
+          <Icon name={icon} />
+        </S.IconWrap>
+      )}
+      <S.Input {...input} className={'fieldTheme'} isIcon={!!icon} />
+    </S.InputWrap>
+  );
 };
 
 export default UDTextField;

@@ -1,5 +1,5 @@
 import UDFormComponentsControlWrapper from '../../control-wrapper';
 import UDTextField from './control';
 
-const UDFormDateRangePicker = UDFormComponentsControlWrapper(UDTextField);
-export default UDFormDateRangePicker;
+const UDFormTextField = UDFormComponentsControlWrapper(UDTextField)
+export default UDFormTextField;

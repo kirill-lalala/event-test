@@ -1,34 +1,29 @@
-import React, { useRef, FunctionComponent } from 'react';
+import React, { useRef, FunctionComponent, useState } from 'react';
 import cn from 'classnames';
 import * as S from './styles';
-import { reduxForm, InjectedFormProps, FormProps } from 'redux-form';
+import { WrappedFieldProps, FormProps } from 'redux-form';
 import { nanoid } from 'nanoid';
 
-interface ControlWrapperProps extends FormProps {
+type ControlWrapperProps = {
   label: string;
-}
+  classNameWrap: string;
+} & WrappedFieldProps;
 
-const UDFormComponentsControlWrapper = (Component: any): FunctionComponent => (
-  props
-) => {
-  const { meta, label, ...otherProps } = props;
+const UDFormComponentsControlWrapper = (
+  Component: any
+): React.FC<ControlWrapperProps> => (props) => {
+  // const [fieldId] = useState('nanoid()');
+  const { meta, label, classNameWrap, ...otherProps } = props;
   const { touched, valid, error } = meta;
 
   const showError = touched && !!error;
   const isSuccess = touched && valid;
 
-  const [fieldId] = React.useState(nanoid);
-
   return (
-    <S.WrapperContainer>
-      {label && <S.Label htmlFor={fieldId}>{label}</S.Label>}
+    <S.WrapperContainer className={classNameWrap}>
+      {label && <S.Label>{label}</S.Label>}
       <S.ControlContainer>
-        <Component
-          {...otherProps}
-          id={fieldId}
-          meta={meta}
-          isHaveError={showError}
-        />
+        <Component {...otherProps} meta={meta} isHaveError={showError} />
       </S.ControlContainer>
       {/* {showError && (
         <ErrorsContainer>
