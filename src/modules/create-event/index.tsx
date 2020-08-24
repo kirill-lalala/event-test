@@ -7,6 +7,7 @@ import { Form, reduxForm, Field } from 'redux-form';
 import Title from 'src/modules/ud-ui/title';
 import UDFormTextField from '../ud-ui/form/ui/components/text-field';
 import UDFormTextAreaField from '../ud-ui/form/ui/components/textarea-field';
+import UDDatePicker from '../ud-ui/date-picker';
 
 type CreateEventProps = {};
 
@@ -73,6 +74,8 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
                 name="organizer"
                 classNameWrap={'mb-12'}
               />
+
+              <UDDatePicker />
             </Form>
           </Main>
         </S.Main>
