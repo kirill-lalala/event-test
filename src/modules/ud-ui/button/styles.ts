@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
   display: flex;
+  justify-content: center;
   border-radius: 4px;
   border: none;
   padding-top: 19px;
@@ -10,16 +11,16 @@ export const Button = styled.button`
   font-size: 16px;
   font-weight: 600;
   &.action {
-    background: #9b63f8;
+    background: ${({ theme }) => theme.buttonColorDark};
     padding-right: 47px;
     padding-left: 47px;
-    color: #ffffff;
+    color: ${({ theme }) => theme.buttonColorLight};
   }
   &.outline {
     padding-right: 16px;
     padding-left: 16px;
     color: ${(props) => props.theme.baseColor};
-    background-color: #ffffff;
-    border: 1px solid #9b63f8;
+    background-color: ${({ theme }) => theme.buttonColorLight};
+    border: 1px solid ${({ theme }) => theme.buttonColorDark};
   }
 `;

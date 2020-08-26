@@ -1,1 +1,1 @@
-export type IconNames = 'profile' | 'url';
+export type IconNames = 'profile' | 'url' | 'dropdownIndicator';

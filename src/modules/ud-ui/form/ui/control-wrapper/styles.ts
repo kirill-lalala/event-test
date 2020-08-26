@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const WrapperContainer = styled.div``;
+export const WrapperContainer = styled.div`
+  width: 100%;
+`;
 
 export const Label = styled.label`
   font-weight: 600;

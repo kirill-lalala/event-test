@@ -9,9 +9,9 @@ type UDTextFieldProps = {
 } & WrappedFieldProps;
 
 const UDTextField = (props: UDTextFieldProps) => {
-  const { input, icon } = props;
+  const { input, icon, ...otherProps } = props;
   return (
-    <S.InputWrap >
+    <S.InputWrap {...otherProps}>
       {icon && (
         <S.IconWrap>
           <Icon name={icon} />

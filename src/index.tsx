@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import { store } from './store';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-const theme = require('sass-extract-loader?{"plugins": ["sass-extract-js"]}!./styles/base/_variables.scss');
+export const theme = require('sass-extract-loader?{"plugins": ["sass-extract-js"]}!./styles/base/_variables.scss');
 
 ReactDOM.render(
   <Provider store={store}>

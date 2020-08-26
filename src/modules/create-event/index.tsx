@@ -8,8 +8,25 @@ import Title from 'src/modules/ud-ui/title';
 import UDFormTextField from '../ud-ui/form/ui/components/text-field';
 import UDFormTextAreaField from '../ud-ui/form/ui/components/textarea-field';
 import UDDatePicker from '../ud-ui/date-picker';
+import UDFormSelectField from '../ud-ui/form/ui/components/select';
+import { OptionProps } from 'react-select/src/types';
+import UDButton from '../ud-ui/button';
 
 type CreateEventProps = {};
+
+const categoriesOptions = [
+  { value: 'birthday', label: 'День рождения' },
+  { value: 'wedding', label: 'Свадьба' },
+  { value: 'corporate', label: 'Корпоратив' },
+];
+
+const ratingOptions = [
+  { value: 'zero', label: '0+' },
+  { value: 'six', label: '6+' },
+  { value: 'twelve', label: '12+' },
+  { value: 'sixteen', label: '16+' },
+  { value: 'eighteen', label: '18+' },
+];
 
 const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
   return (
@@ -18,7 +35,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
       <div className="container pt-31">
         <S.Main>
           <MainTitle>Создать мероприятие</MainTitle>
-          <Main>
+          <Main className={'mb-33'}>
             <Form>
               <Title>Информация об организаторе</Title>
               <Field
@@ -76,6 +93,46 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
               />
 
               <UDDatePicker />
+
+              <S.Fields className={'mb-12'}>
+                <Field
+                  label={'Категория'}
+                  component={UDFormSelectField}
+                  name="category"
+                  options={categoriesOptions}
+                  className={'mr-4'}
+                />
+                <Field
+                  label={'Рейтинг мероприятия'}
+                  // defaultValue={ratingOptions[0]}
+                  component={UDFormSelectField}
+                  name="rating"
+                  options={ratingOptions}
+                />
+              </S.Fields>
+
+              <S.Fields className={'mb-17'}>
+                <Field
+                  label={'Адрес мероприятия'}
+                  component={UDFormTextField}
+                  name="address"
+                  className={'mr-4'}
+                />
+                <Field
+                  label={'Комментарий к адресу'}
+                  component={UDFormTextField}
+                  name="comment"
+                />
+              </S.Fields>
+
+              <S.FormButtons>
+                <UDButton theme={'outline'} className={'mr-5 w-25'}>
+                  Отменить
+                </UDButton>
+                <UDButton theme={'action'} className={'w-25'}>
+                  Далее
+                </UDButton>
+              </S.FormButtons>
             </Form>
           </Main>
         </S.Main>

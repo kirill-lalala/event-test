@@ -1,7 +1,7 @@
 import React, { useRef, FunctionComponent, useState } from 'react';
 import cn from 'classnames';
 import * as S from './styles';
-import { WrappedFieldProps, FormProps } from 'redux-form';
+import { FormProps, WrappedFieldProps } from 'redux-form';
 import { nanoid } from 'nanoid';
 
 type ControlWrapperProps = {
