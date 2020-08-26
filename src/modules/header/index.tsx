@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <S.Wrap>
       <div className="container">
-        <div className="row pt-7 d-flex justify-content-between">
+        <div className="pt-7 d-flex justify-content-between">
           <Navigation items={NAVIGATION_ITEMS} />
           <S.RightBlock>
             <div className={'mr-12'}>icon</div>

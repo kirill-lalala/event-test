@@ -21,7 +21,11 @@ body {
 }
 
 a {
-  text-decoration: none;
+  color: #ffffff;
+  &:hover {
+    color: darken(#ffffff, 20%);
+    text-decoration: none;
+  }
 }
 
 img {
@@ -61,6 +65,10 @@ label {
 
 .w-100 {
   width: 100% !important;
+}
+
+.flex-none {
+  flex: none;
 }
 
 .fieldTheme {

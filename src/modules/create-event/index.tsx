@@ -9,8 +9,8 @@ import UDFormTextField from '../ud-ui/form/ui/components/text-field';
 import UDFormTextAreaField from '../ud-ui/form/ui/components/textarea-field';
 import UDDatePicker from '../ud-ui/date-picker';
 import UDFormSelectField from '../ud-ui/form/ui/components/select';
-import { OptionProps } from 'react-select/src/types';
 import UDButton from '../ud-ui/button';
+import Footer from '../footer';
 
 type CreateEventProps = {};
 
@@ -35,14 +35,14 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
       <div className="container pt-31">
         <S.Main>
           <MainTitle>Создать мероприятие</MainTitle>
-          <Main className={'mb-33'}>
+          <Main className="mb-33">
             <Form>
               <Title>Информация об организаторе</Title>
               <Field
                 label={'Организатор'}
                 component={UDFormTextField}
                 name="organizer"
-                classNameWrap={'mb-10'}
+                classNameWrap="mb-10"
               />
 
               <Title>Контактные данные</Title>
@@ -137,6 +137,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
           </Main>
         </S.Main>
       </div>
+      <Footer />
     </div>
   );
 };
