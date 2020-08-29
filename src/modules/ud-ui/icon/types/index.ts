@@ -9,4 +9,5 @@ export type IconNames =
   | 'vk'
   | 'instagram'
   | 'logo'
-  | 'camera';
+  | 'camera'
+  | 'cross';

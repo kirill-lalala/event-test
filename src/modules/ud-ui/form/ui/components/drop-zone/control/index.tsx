@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react';
-import { WrappedFieldProps } from 'redux-form';
+import { WrappedFieldProps, change } from 'redux-form';
 import * as S from './styles';
 import { useDropzone } from 'react-dropzone';
 import Icon from 'src/modules/ud-ui/icon';
+import { useDispatch } from 'react-redux';
+import cn from 'classnames';
 
 type UDDropZoneProps = {
   required?: boolean;
@@ -10,8 +12,11 @@ type UDDropZoneProps = {
 } & WrappedFieldProps;
 
 const UDDropZone = (props: UDDropZoneProps) => {
-  const { meta, input, title, ...otherProps } = props;
-  const { value, onChange } = input;
+  const { meta, input, title, required, ...otherProps } = props;
+  const { value, onChange, name } = input;
+  const { form } = meta;
+
+  const dispatch = useDispatch();
 
   const onDrop = useCallback((files) => {
     if (files.length) {
@@ -24,17 +29,30 @@ const UDDropZone = (props: UDDropZoneProps) => {
       reader.readAsDataURL(file);
     }
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: false,
   });
 
+  const onCrossClick = useCallback(() => {
+    dispatch(change(form, name, ''));
+  }, []);
+
   return (
     <S.Wrap {...otherProps}>
-      <S.Container {...getRootProps()}>
+      {value && (
+        <S.Cross onClick={onCrossClick}>
+          <Icon name="cross" />
+        </S.Cross>
+      )}
+      <S.Container {...getRootProps()} required={required}>
         <input {...getInputProps()} />
-        <Icon name={'camera'} />
-        {value && <img src={value} />}
+        {value ? (
+          <img src={value} style={{ width: '100%', height: '100%' }} />
+        ) : (
+          isDragActive || <Icon name={'camera'} />
+        )}
       </S.Container>
       {title && <S.Description>{title}</S.Description>}
     </S.Wrap>

@@ -3,7 +3,7 @@ import Header from '../header';
 import * as S from './styles';
 import { MainTitle } from '../ud-ui/main-title/styles';
 import { Main } from '../ud-ui/main/styles';
-import { Form, reduxForm, Field } from 'redux-form';
+import { Form, reduxForm, Field, FormSection } from 'redux-form';
 import Title from 'src/modules/ud-ui/title';
 import UDFormTextField from '../ud-ui/form/ui/components/text-field';
 import UDFormTextAreaField from '../ud-ui/form/ui/components/textarea-field';
@@ -78,7 +78,9 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
                 classNameWrap={'mb-10'}
               />
 
-              <UDPhotos />
+              <FormSection name="photos">
+                <UDPhotos />
+              </FormSection>
 
               <Field
                 label={'Видео (ссылка)'}
