@@ -11,6 +11,9 @@ import UDDatePicker from '../ud-ui/date-picker';
 import UDFormSelectField from '../ud-ui/form/ui/components/select';
 import UDButton from '../ud-ui/button';
 import Footer from '../footer';
+import { Label } from '../ud-ui/form/ui/control-wrapper/styles';
+import UDDropZone from '../ud-ui/form/ui/components/drop-zone/control';
+import UDPhotos from '../ud-ui/photos';
 
 type CreateEventProps = {};
 
@@ -75,7 +78,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
                 classNameWrap={'mb-10'}
               />
 
-              <Title>Фотографии</Title>
+              <UDPhotos />
 
               <Field
                 label={'Видео (ссылка)'}
