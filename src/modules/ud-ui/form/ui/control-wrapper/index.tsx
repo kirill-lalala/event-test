@@ -3,10 +3,11 @@ import cn from 'classnames';
 import * as S from './styles';
 import { FormProps, WrappedFieldProps } from 'redux-form';
 import { nanoid } from 'nanoid';
+import { ReactDatePickerProps } from 'react-datepicker';
 
 type ControlWrapperProps = {
-  label: string;
-  classNameWrap: string;
+  label?: string;
+  classNameWrap?: string;
 } & WrappedFieldProps;
 
 const UDFormComponentsControlWrapper = (
@@ -23,7 +24,7 @@ const UDFormComponentsControlWrapper = (
     <S.WrapperContainer className={classNameWrap}>
       {label && <S.Label>{label}</S.Label>}
       <S.ControlContainer>
-        <Component {...otherProps} meta={meta} isHaveError={showError} />
+        <Component {...otherProps} isHaveError={showError} />
       </S.ControlContainer>
       {/* {showError && (
         <ErrorsContainer>
