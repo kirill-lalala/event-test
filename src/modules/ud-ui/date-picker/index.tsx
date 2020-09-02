@@ -1,23 +1,15 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
-import { setDefaultLocale, registerLocale } from 'react-datepicker';
+import React, { FunctionComponent, useEffect } from 'react';
+import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import * as S from './styles';
 import 'react-datepicker/dist/react-datepicker.css';
 import setHours from 'date-fns/setHours';
 import setMinutes from 'date-fns/setMinutes';
-import UDButton from '../button';
-import { Field, initialize } from 'redux-form';
+import { Field, formValueSelector, initialize } from 'redux-form';
 import UDFormDatePickerField from 'src/modules/ud-ui/form/ui/components/date-picker';
-import { formValueSelector } from 'redux-form';
-import { useSelector, useDispatch } from 'react-redux';
-import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
 
 type DatePickerProps = {};
-
-type CustomInputType = {
-  value?: string;
-  onClick?: () => void;
-};
 
 const selector = formValueSelector('createEvent');
 
@@ -84,7 +76,6 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
           maxTime={setHours(setMinutes(new Date(), 59), 23)}
           timeFormat="HH.mm"
           selected={startTime}
-          // onChange={(time: Date) => setStartTime(time)}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
@@ -97,13 +88,12 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
           <Field
             component={UDFormDatePickerField}
             name={'endDate'}
+            dateFormat="dd.MM.yyyy"
             selected={endDate}
             selectsEnd
             startDate={startDate}
             endDate={endDate}
             minDate={startDate}
-            // onChange={(date: Date) => setEndDate(date)}
-            // customInput={<CustomInput />}
           />
         </div>
 
@@ -111,18 +101,15 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
           component={UDFormDatePickerField}
           name={'endTime'}
           selected={endTime}
-          // onChange={(time: Date) => setstartTime(time)}
           minTime={minEndTime}
           maxTime={setHours(setMinutes(new Date(), 59), 23)}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
-          dateFormat="hh:mm aa"
-          // customInput={<CustomInput />}
+          timeFormat="HH.mm"
+          dateFormat="HH.mm"
         />
       </S.DateWrap>
-
-      <UDButton theme={'outline'}>+ Добавить дату</UDButton>
     </div>
   );
 };

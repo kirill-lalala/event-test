@@ -1,5 +1,4 @@
-import React, { FunctionComponent } from 'react';
-import cn from 'classnames';
+import React, {FunctionComponent} from 'react';
 import * as S from './styles';
 import Icon from '../icon';
 

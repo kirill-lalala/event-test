@@ -7,13 +7,11 @@ import { Form, reduxForm, Field, FormSection, FieldArray } from 'redux-form';
 import Title from 'src/modules/ud-ui/title';
 import UDFormTextField from '../ud-ui/form/ui/components/text-field';
 import UDFormTextAreaField from '../ud-ui/form/ui/components/textarea-field';
-import UDDatePicker from '../ud-ui/date-picker';
 import UDFormSelectField from '../ud-ui/form/ui/components/select';
 import UDButton from '../ud-ui/button';
 import Footer from '../footer';
-import { Label } from '../ud-ui/form/ui/control-wrapper/styles';
-import UDDropZone from '../ud-ui/form/ui/components/drop-zone/control';
 import UDPhotos from '../ud-ui/photos';
+import renderDates from '../ud-ui/date-picker/renderDates';
 
 type CreateEventProps = {};
 
@@ -97,8 +95,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
                 classNameWrap={'mb-12'}
               />
 
-              <UDDatePicker />
-              {/* <FieldArray name={'dates'} component={}/> */}
+              <FieldArray name={'dates'} component={renderDates} />
 
               <S.Fields className={'mb-12'}>
                 <Field
@@ -110,7 +107,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
                 />
                 <Field
                   label={'Рейтинг мероприятия'}
-                  // defaultValue={ratingOptions[0]}
+                  defaultValue={ratingOptions[0]}
                   component={UDFormSelectField}
                   name="rating"
                   options={ratingOptions}

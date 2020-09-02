@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
-import { WrappedFieldProps } from 'redux-form';
+import React from 'react';
+import {WrappedFieldProps} from 'redux-form';
 import * as S from './styles';
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 
 const CustomInput = ({ value, onClick }: any) => {
   return (

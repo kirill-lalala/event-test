@@ -1,10 +1,9 @@
-import React, { useCallback } from 'react';
-import { WrappedFieldProps, change } from 'redux-form';
+import React, {useCallback} from 'react';
+import {change, WrappedFieldProps} from 'redux-form';
 import * as S from './styles';
-import { useDropzone } from 'react-dropzone';
+import {useDropzone} from 'react-dropzone';
 import Icon from 'src/modules/ud-ui/icon';
-import { useDispatch } from 'react-redux';
-import cn from 'classnames';
+import {useDispatch} from 'react-redux';
 
 type UDDropZoneProps = {
   required?: boolean;
@@ -28,7 +27,7 @@ const UDDropZone = (props: UDDropZoneProps) => {
       };
       reader.readAsDataURL(file);
     }
-  }, []);
+  }, [onChange]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -37,7 +36,7 @@ const UDDropZone = (props: UDDropZoneProps) => {
 
   const onCrossClick = useCallback(() => {
     dispatch(change(form, name, ''));
-  }, []);
+  }, [dispatch, form, name]);
 
   return (
     <S.Wrap {...otherProps}>
