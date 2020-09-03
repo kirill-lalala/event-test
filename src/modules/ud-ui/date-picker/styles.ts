@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 type HorizontalSeparatorProps = {
-  type: 'big' | 'small';
-}
+  size: 'big' | 'small';
+};
 
 export const DateWrap = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ export const DateWrap = styled.div`
   .react-datepicker-wrapper {
     width: 100% !important;
   }
-`
+`;
 
 export const CustomInput = styled.button`
   border: 1px solid ${({ theme }) => theme.borderField};
@@ -19,16 +19,18 @@ export const CustomInput = styled.button`
   color: ${({ theme }) => theme.baseColor};
   padding: 19px 25px;
   width: 100%;
-`
+`;
 
 export const HorizontalSeparator = styled.div<HorizontalSeparatorProps>`
   height: 2px;
   background: ${({ theme }) => theme.borderField};
   border-radius: 5px;
-  width: ${(props) =>
-    props.type === 'big' ? '55px' :
-      props.type === 'small' ? '30px' : 'auto'};
+  min-width: ${(props) =>
+    props.size === 'big' ? '55px' : props.size === 'small' ? '22px' : 'auto'};
   margin: ${(props) =>
-    props.type === 'big' ? '0 14px' :
-      props.type === 'small' ? '0 5px' : 'auto'}
+    props.size === 'big'
+      ? '0 14px -31px'
+      : props.size === 'small'
+      ? '0 5px -31px'
+      : 'auto'};
 `;

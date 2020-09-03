@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import UDCross, { CrossProps } from 'src/modules/ud-ui/cross';
 
 export const Container = styled.div<{ required?: boolean }>`
   display: flex;
@@ -25,16 +26,8 @@ export const Description = styled.p`
   margin-top: 12px;
 `;
 
-export const Cross = styled.div`
+export const Cross = styled(UDCross)<CrossProps>`
   position: absolute;
   right: -14px;
   top: -15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${({ theme }) => theme.dark};
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
 `;
