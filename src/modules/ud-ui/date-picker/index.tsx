@@ -1,40 +1,56 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { registerLocale, setDefaultLocale } from 'react-datepicker';
-import ru from 'date-fns/locale/ru';
 import * as S from './styles';
 import 'react-datepicker/dist/react-datepicker.css';
 import setHours from 'date-fns/setHours';
 import setMinutes from 'date-fns/setMinutes';
-import { Field, formValueSelector, initialize } from 'redux-form';
+import { Field, formValueSelector, change } from 'redux-form';
 import {
   UDFormDatePickerField,
   UDFormTimePickerField,
 } from 'src/modules/ud-ui/form/ui/components/date-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { ClassNameList } from 'react-select';
 
 type DatePickerProps = {
   separatorSize?: 'big' | 'small';
   className?: string;
+  member?: string;
 };
 
 const selector = formValueSelector('createEvent');
 
-registerLocale('ru', ru);
-setDefaultLocale('ru');
-
 const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
-  const { separatorSize = 'big', className } = props;
+  const { separatorSize = 'big', className, member } = props;
+  const dispatch = useDispatch();
   const currentDate = new Date();
 
-  const startDate =
-    useSelector((state) => selector(state, 'startDate')) || currentDate;
-  const startTime =
-    useSelector((state) => selector(state, 'startTime')) || currentDate;
-  const endDate =
-    useSelector((state) => selector(state, 'endDate')) || currentDate;
-  const endTime =
-    useSelector((state) => selector(state, 'endTime')) || currentDate;
+  const defaultNames = ['startDate', 'startTime', 'endDate', 'endTime'];
+  let names = [...defaultNames];
+  if (!!member) {
+    names = defaultNames.map((name) => `${member}.${name}`);
+  }
+
+  const getFieldValue = (name: string) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useSelector((state) => selector(state, name));
+  };
+
+  const defaultValues = defaultNames.map((name) => {
+    return getFieldValue(name);
+  });
+
+  const values = names.map((name) => {
+    return getFieldValue(name);
+  });
+
+  const [startDate, startTime, endDate, endTime] = values;
+
+  useEffect(() => {
+    names.forEach((name, index) => {
+      dispatch(
+        change('createEvent', name, defaultValues[index] || currentDate)
+      );
+    });
+  }, []);
 
   const isSameDate = startDate?.toDateString() === endDate?.toDateString();
   const isToday = currentDate.toDateString() === startDate?.toDateString();
@@ -48,7 +64,7 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
 
   const minEndTime: Date = isSameDate
     ? setHours(
-        setMinutes(currentDate, startTime?.getMinutes()),
+        setMinutes(currentDate, new Date(startTime)?.getMinutes()),
         startTime?.getHours()
       )
     : setHours(setMinutes(currentDate, 0), 0);
@@ -59,7 +75,7 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
         <div className={'mr-5 w-100'}>
           <Field
             component={UDFormDatePickerField}
-            name={'startDate'}
+            name={names[0]}
             label={'Дата начала'}
             selected={startDate}
             startDate={startDate}
@@ -71,7 +87,7 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
 
         <Field
           component={UDFormTimePickerField}
-          name={'startTime'}
+          name={names[1]}
           label={'Время начала'}
           selected={startTime}
           minTime={minStartTime}
@@ -83,7 +99,7 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
         <div className={'mr-5 w-100'}>
           <Field
             component={UDFormDatePickerField}
-            name={'endDate'}
+            name={names[2]}
             label={'Дата окончания'}
             selected={endDate}
             selectsEnd
@@ -95,10 +111,11 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
 
         <Field
           component={UDFormTimePickerField}
-          name={'endTime'}
+          name={names[3]}
           label={'Время окончания'}
           selected={endTime}
           minTime={minEndTime}
+          maxTime={setHours(setMinutes(startDate, 59), 23)}
         />
       </S.DateWrap>
     </div>

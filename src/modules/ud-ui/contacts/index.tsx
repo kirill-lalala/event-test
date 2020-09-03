@@ -1,9 +1,9 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 import cn from 'classnames';
 import * as S from './styles';
 import isLastItem from 'src/modules/helpers/lastItem';
 import Icon from '../icon';
-import {Contacts, ContactsProps} from './types';
+import { Contacts, ContactsProps } from './types';
 
 const contacts: Contacts = [
   { label: 'mail', data: 'info@zelfi.com', icon: 'envelope' },
@@ -26,9 +26,9 @@ const UDContacts: FunctionComponent<ContactsProps> = (props) => {
             .filter(Boolean)
             .join(' ');
           return (
-            <S.Li className={liClassName}>
+            <S.Li className={liClassName} key={index.toString()}>
               <Icon name={contact.icon} className={'mr-3'} />
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#">{contact.data}</a>
             </S.Li>
           );

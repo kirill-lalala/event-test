@@ -1,8 +1,13 @@
 import React from 'react';
 import { WrappedFieldProps } from 'redux-form';
+import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import * as S from './styles';
 import DatePicker from 'react-datepicker';
+import ru from 'date-fns/locale/ru';
 import './styles.css';
+
+registerLocale('ru', ru);
+setDefaultLocale('ru');
 
 const CustomInput = ({ value, onClick, ...otherProps }: any) => {
   return (

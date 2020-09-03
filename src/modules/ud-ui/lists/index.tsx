@@ -17,13 +17,13 @@ const UDLists: FunctionComponent<ListsProps> = (props) => {
       {lists.map((column, index) => {
         const ulWrapClassName = cn({ 'mr-20': !isLastItem(lists, index) });
         return (
-          <div className={ulWrapClassName}>
+          <div className={ulWrapClassName} key={index.toString()}>
             <ul>
               {column.map((item, index) => {
                 const liClassName = cn({ 'mb-5': !isLastItem(column, index) });
                 return (
-                  <S.Li className={liClassName}>
-                    <a href="#">{item}</a>
+                  <S.Li className={liClassName} key={`${item}_${index}`}>
+                    <a href="https://rdbx.ru/">{item}</a>
                   </S.Li>
                 );
               })}

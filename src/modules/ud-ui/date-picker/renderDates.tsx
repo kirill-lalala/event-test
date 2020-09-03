@@ -1,5 +1,5 @@
 import React from 'react';
-import { WrappedFieldArrayProps, FieldIterate } from 'redux-form';
+import { WrappedFieldArrayProps } from 'redux-form';
 import UDDatePicker from '.';
 import UDButton from '../button';
 import AddedDate from './added';
@@ -7,14 +7,15 @@ import AddedDate from './added';
 type RenderMemberProps = {} & WrappedFieldArrayProps;
 
 const renderDates = (props: RenderMemberProps) => {
-  const {
-    fields,
-    // meta: { error, submitFailed },
-  } = props;
+  const { fields } = props;
   return (
     <>
       {fields.map((member, index) => (
-        <AddedDate onClick={() => fields.remove(index)} />
+        <AddedDate
+          onClick={() => fields.remove(index)}
+          member={member}
+          key={member}
+        />
       ))}
       <UDDatePicker className={'mb-8'} />
       <UDButton
@@ -25,7 +26,6 @@ const renderDates = (props: RenderMemberProps) => {
       >
         + Добавить дату
       </UDButton>
-      {/* {submitFailed && error && <span>{error}</span>} */}
     </>
   );
 };

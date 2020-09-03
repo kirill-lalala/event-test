@@ -14,11 +14,18 @@ type UDButtonProps = {
 };
 
 const UDButton: FunctionComponent<UDButtonProps> = (props) => {
-  const { children, className, theme, icon, ...otherProps } = props;
+  const {
+    children,
+    className,
+    theme,
+    icon,
+    type = 'button',
+    ...otherProps
+  } = props;
   const btnClassName = cn(className, theme, {});
 
   return (
-    <S.Button className={btnClassName} {...otherProps}>
+    <S.Button className={btnClassName} type={type} {...otherProps}>
       {icon && <Icon name={icon} className={'mr-3'} />}
       {children}
     </S.Button>

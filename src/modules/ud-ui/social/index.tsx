@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import cn from 'classnames';
-import * as S from './styles';
 import Icon from '../icon';
 import { IconNames } from '../icon/types';
 import isLastItem from 'src/modules/helpers/lastItem';
@@ -21,7 +20,7 @@ const UDSocial: FunctionComponent<SocialProps> = (props) => {
       {socials.map((social, index) => {
         const SocialWrapClassName = cn({ 'mr-8': !isLastItem(socials, index) });
         return (
-          <div className={SocialWrapClassName}>
+          <div className={SocialWrapClassName} key={social.link}>
             <a href={social.link}>
               <Icon name={social.icon} />
             </a>

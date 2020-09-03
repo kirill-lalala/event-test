@@ -3,7 +3,16 @@ import Header from '../header';
 import * as S from './styles';
 import { MainTitle } from '../ud-ui/main-title/styles';
 import { Main } from '../ud-ui/main/styles';
-import { Form, reduxForm, Field, FormSection, FieldArray } from 'redux-form';
+import {
+  Form,
+  reduxForm,
+  Field,
+  FormSection,
+  FieldArray,
+  WrappedReduxFormContext,
+  FormInstance,
+  reset,
+} from 'redux-form';
 import Title from 'src/modules/ud-ui/title';
 import UDFormTextField from '../ud-ui/form/ui/components/text-field';
 import UDFormTextAreaField from '../ud-ui/form/ui/components/textarea-field';
@@ -12,6 +21,7 @@ import UDButton from '../ud-ui/button';
 import Footer from '../footer';
 import UDPhotos from '../ud-ui/photos';
 import renderDates from '../ud-ui/date-picker/renderDates';
+import { useDispatch } from 'react-redux';
 
 type CreateEventProps = {};
 
@@ -29,7 +39,10 @@ const ratingOptions = [
   { value: 'eighteen', label: '18+' },
 ];
 
+const FORM_NAME = 'createEvent';
+
 const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
+  const dispatch = useDispatch();
   return (
     <div>
       <Header />
@@ -129,7 +142,12 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
               </S.Fields>
 
               <S.FormButtons>
-                <UDButton theme={'outline'} className={'mr-5 w-25'}>
+                <UDButton
+                  theme={'outline'}
+                  type={'button'}
+                  className={'mr-5 w-25'}
+                  onClick={() => dispatch(reset(FORM_NAME))}
+                >
                   Отменить
                 </UDButton>
                 <UDButton theme={'action'} className={'w-25'}>
@@ -144,8 +162,6 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
     </div>
   );
 };
-
-const FORM_NAME = 'createEvent';
 
 export default reduxForm({
   form: FORM_NAME,

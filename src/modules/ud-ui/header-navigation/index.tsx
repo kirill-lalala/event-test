@@ -11,8 +11,8 @@ const Navigation = (props: Props) => {
     <S.NavigationWrap>
       <S.Navigation>
         <S.List>
-          {items.map((item) => (
-            <S.ListItem>{item}</S.ListItem>
+          {items.map((item, index) => (
+            <S.ListItem key={`${item}_${index}`}>{item}</S.ListItem>
           ))}
         </S.List>
       </S.Navigation>

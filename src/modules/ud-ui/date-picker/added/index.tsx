@@ -4,14 +4,15 @@ import * as S from './styles';
 
 type AddedDateProps = {
   onClick: () => void;
+  member: string;
 };
 
 const AddedDate: FunctionComponent<AddedDateProps> = (props) => {
-  const { onClick } = props;
+  const { onClick, member } = props;
   return (
     <S.Wrap className={'mb-10'}>
       <S.Cross onClick={onClick} />
-      <UDDatePicker separatorSize={'small'} />
+      <UDDatePicker separatorSize={'small'} member={member} />
     </S.Wrap>
   );
 };
