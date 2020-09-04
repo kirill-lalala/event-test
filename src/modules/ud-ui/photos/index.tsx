@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import * as S from './styles';
 import { Label } from '../form/ui/control-wrapper/styles';
 import { Field, formValueSelector } from 'redux-form';
-import UDDropZone from '../form/ui/components/drop-zone/control';
 import { useSelector } from 'react-redux';
+import { UDDropZoneField } from '../form/ui/components/drop-zone';
 
 type PhotosProps = {};
 
@@ -21,30 +21,36 @@ const UDPhotos: FunctionComponent<PhotosProps> = (props) => {
       </S.PhotoLabel>
 
       <S.PhotosWrap className={'mb-8'}>
-        <Field
-          name={'mainPhoto'}
-          component={UDDropZone}
-          className={'mr-5'}
-          title={'Главная фотография (обложка мероприятия)'}
-          required
-        />
-        <Field
-          name={'eventPhoto'}
-          component={UDDropZone}
-          className={'mr-5'}
-          title={'Фотография для карточки мероприятия'}
-          required
-        />
-        <Field name={'additionalPhoto1'} component={UDDropZone} />
-        {photosLength >= 3 && (
+        <div className={'mr-5'}>
           <Field
-            name={'additionalPhoto2'}
-            component={UDDropZone}
-            className={'mr-5 ml-5'}
+            name={'mainPhoto'}
+            component={UDDropZoneField}
+            title={'Главная фотография (обложка мероприятия)'}
+            errorStyles={{ width: '126px', position: 'initial' }}
+            required
           />
+        </div>
+        <div className={'mr-5'}>
+          <Field
+            name={'eventPhoto'}
+            component={UDDropZoneField}
+            title={'Фотография для карточки мероприятия'}
+            errorStyles={{ width: '126px', position: 'initial' }}
+            required
+          />
+        </div>
+        <div>
+          <Field name={'additionalPhoto1'} component={UDDropZoneField} />
+        </div>
+        {photosLength >= 3 && (
+          <div className={'mr-5 ml-5'}>
+            <Field name={'additionalPhoto2'} component={UDDropZoneField} />
+          </div>
         )}
         {photosLength >= 4 && (
-          <Field name={'additionalPhoto3'} component={UDDropZone} />
+          <div>
+            <Field name={'additionalPhoto3'} component={UDDropZoneField} />
+          </div>
         )}
       </S.PhotosWrap>
     </div>

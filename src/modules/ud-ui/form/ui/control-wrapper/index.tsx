@@ -1,49 +1,32 @@
-import React, { useRef, FunctionComponent, useState } from 'react';
-import cn from 'classnames';
+import React from 'react';
 import * as S from './styles';
-import { FormProps, WrappedFieldProps } from 'redux-form';
-import { nanoid } from 'nanoid';
-import { ReactDatePickerProps } from 'react-datepicker';
+import { WrappedFieldProps } from 'redux-form';
 
 type ControlWrapperProps = {
   label?: string;
   classNameWrap?: string;
+  errorStyles?: object;
 } & WrappedFieldProps;
 
 const UDFormComponentsControlWrapper = (
   Component: any
 ): React.FC<ControlWrapperProps> => (props) => {
-  // const [fieldId] = useState('nanoid()');
-  const { meta, label, classNameWrap, ...otherProps } = props;
-  const { touched, valid, error } = meta;
+  const { meta, label, classNameWrap, errorStyles, ...otherProps } = props;
+  const { touched, error } = meta;
 
   const showError = touched && !!error;
-  const isSuccess = touched && valid;
 
   return (
     <S.WrapperContainer className={classNameWrap}>
       {label && <S.Label>{label}</S.Label>}
       <S.ControlContainer>
-        <Component {...otherProps} isHaveError={showError} />
+        <Component {...otherProps} meta={meta} isHaveError={showError} />
       </S.ControlContainer>
-      {/* {showError && (
-        <ErrorsContainer>
-          {error &&
-            !!error.length &&
-            error.map((error: string) =>
-              !!error ? (
-                <FieldError key={getInputId('error')}>
-                  <Icon
-                    name="alert-triangle"
-                    alt="alert icon"
-                    className="mr-2"
-                  />
-                  {error}
-                </FieldError>
-              ) : null
-            )}
-        </ErrorsContainer>
-      )} */}
+      {showError && (
+        <div style={{ position: 'absolute', color: 'red', ...errorStyles }}>
+          {error}
+        </div>
+      )}
     </S.WrapperContainer>
   );
 };

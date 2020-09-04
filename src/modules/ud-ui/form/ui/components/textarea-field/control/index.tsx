@@ -1,14 +1,13 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { WrappedFieldProps } from 'redux-form';
 import * as S from './styles';
 
-type UDTextFieldProps = {
-} & WrappedFieldProps;
+type UDTextFieldProps = {} & WrappedFieldProps;
 
 const UDTextAreaField = (props: UDTextFieldProps) => {
   const { input } = props;
   return (
-    <S.InputWrap >
+    <S.InputWrap>
       <S.TextArea {...input} className={'fieldTheme'} />
     </S.InputWrap>
   );

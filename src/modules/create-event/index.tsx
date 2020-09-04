@@ -9,9 +9,7 @@ import {
   Field,
   FormSection,
   FieldArray,
-  WrappedReduxFormContext,
-  FormInstance,
-  reset,
+  InjectedFormProps,
 } from 'redux-form';
 import Title from 'src/modules/ud-ui/title';
 import UDFormTextField from '../ud-ui/form/ui/components/text-field';
@@ -21,9 +19,11 @@ import UDButton from '../ud-ui/button';
 import Footer from '../footer';
 import UDPhotos from '../ud-ui/photos';
 import renderDates from '../ud-ui/date-picker/renderDates';
-import { useDispatch } from 'react-redux';
+import validate from './validator';
 
-type CreateEventProps = {};
+interface StateProps {}
+
+interface CreateEventProps extends StateProps {}
 
 const categoriesOptions = [
   { value: 'birthday', label: 'День рождения' },
@@ -41,8 +41,11 @@ const ratingOptions = [
 
 const FORM_NAME = 'createEvent';
 
-const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
-  const dispatch = useDispatch();
+const CreateEvent: FunctionComponent<
+  CreateEventProps & InjectedFormProps<{}, CreateEventProps>
+> = (props) => {
+  const { handleSubmit, submitting, reset, pristine } = props;
+
   return (
     <div>
       <Header />
@@ -50,7 +53,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
         <S.Main>
           <MainTitle>Создать мероприятие</MainTitle>
           <Main className="mb-33">
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Title>Информация об организаторе</Title>
               <Field
                 label={'Организатор'}
@@ -64,19 +67,19 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
                 <Field
                   label={'Телефон'}
                   component={UDFormTextField}
-                  name="organizer"
+                  name="phone"
                   classNameWrap={'mr-5 w-100'}
                 />
                 <Field
                   label={'E-mail'}
                   component={UDFormTextField}
-                  name="organizer"
+                  name="email"
                   classNameWrap={'mr-5 w-100'}
                 />
                 <Field
                   label={'Город организатора'}
                   component={UDFormTextField}
-                  name="organizer"
+                  name="city"
                   classNameWrap={'w-100'}
                 />
               </S.Fields>
@@ -85,7 +88,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
               <Field
                 label={'Название'}
                 component={UDFormTextField}
-                name="organizer"
+                name="eventName"
                 classNameWrap={'mb-10'}
               />
 
@@ -96,7 +99,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
               <Field
                 label={'Видео (ссылка)'}
                 component={UDFormTextField}
-                name="organizer"
+                name="videoRef"
                 classNameWrap={'mb-10'}
                 icon={'url'}
               />
@@ -104,7 +107,7 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
               <Field
                 label={'Подробное описание'}
                 component={UDFormTextAreaField}
-                name="organizer"
+                name="detailedDescription"
                 classNameWrap={'mb-12'}
               />
 
@@ -146,11 +149,17 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
                   theme={'outline'}
                   type={'button'}
                   className={'mr-5 w-25'}
-                  onClick={() => dispatch(reset(FORM_NAME))}
+                  onClick={reset}
+                  disabled={pristine || submitting}
                 >
                   Отменить
                 </UDButton>
-                <UDButton theme={'action'} className={'w-25'}>
+                <UDButton
+                  theme={'action'}
+                  className={'w-25'}
+                  type={'submit'}
+                  disabled={submitting}
+                >
                   Далее
                 </UDButton>
               </S.FormButtons>
@@ -163,6 +172,25 @@ const CreateEvent: FunctionComponent<CreateEventProps> = (props) => {
   );
 };
 
-export default reduxForm({
+export default reduxForm<{}, CreateEventProps, string>({
   form: FORM_NAME,
+  onSubmit: () => {},
+  validate,
+  onSubmitFail: () => {
+    try {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    } catch (error) {
+      window.scrollTo(0, 0);
+    }
+    alert('Упс, Кажется произошла ошибка');
+  },
+  onSubmitSuccess: () => {
+    alert(
+      'Валидные данные! Но кажется произошла ошибка с загрузкой второй страницы, мы уже разбираемся с этой проблемой'
+    );
+  },
 })(CreateEvent);

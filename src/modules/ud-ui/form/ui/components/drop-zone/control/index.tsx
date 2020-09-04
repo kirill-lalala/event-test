@@ -4,7 +4,6 @@ import * as S from './styles';
 import { useDropzone } from 'react-dropzone';
 import Icon from 'src/modules/ud-ui/icon';
 import { useDispatch } from 'react-redux';
-import { Cross } from 'src/modules/ud-ui/cross/styles';
 
 type UDDropZoneProps = {
   required?: boolean;
@@ -48,7 +47,11 @@ const UDDropZone = (props: UDDropZoneProps) => {
       <S.Container {...getRootProps()} required={required}>
         <input {...getInputProps()} />
         {value ? (
-          <img src={value} style={{ width: '100%', height: '100%' }} />
+          <img
+            src={value}
+            style={{ width: '100%', height: '100%' }}
+            alt={'event'}
+          />
         ) : (
           isDragActive || <Icon name={'camera'} />
         )}

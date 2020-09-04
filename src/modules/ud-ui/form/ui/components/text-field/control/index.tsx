@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { WrappedFieldProps } from 'redux-form';
 import { IconNames } from 'src/modules/ud-ui/icon/types';
 import * as S from './styles';

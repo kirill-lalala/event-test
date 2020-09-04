@@ -11,6 +11,7 @@ type UDButtonProps = {
   className?: string;
   icon?: IconNames;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 };
 
 const UDButton: FunctionComponent<UDButtonProps> = (props) => {

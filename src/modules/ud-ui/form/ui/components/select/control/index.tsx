@@ -1,12 +1,6 @@
 import React, { useContext } from 'react';
-import Select, {
-  StylesConfig,
-  components,
-  IndicatorProps,
-  OptionsType,
-} from 'react-select';
+import Select, { StylesConfig, components, IndicatorProps } from 'react-select';
 import { WrappedFieldProps } from 'redux-form';
-import * as S from './styles';
 import { ThemeContext } from 'styled-components';
 import Icon from 'src/modules/ud-ui/icon';
 

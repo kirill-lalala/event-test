@@ -44,6 +44,7 @@ const UDDatePicker: FunctionComponent<DatePickerProps> = (props) => {
 
   const [startDate, startTime, endDate, endTime] = values;
 
+  /* eslint-disable */
   useEffect(() => {
     names.forEach((name, index) => {
       dispatch(
